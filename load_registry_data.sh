@@ -3,9 +3,15 @@
 # 功能: 从线上pull镜像导入线下安装registry
 # Author: jyliu
 
+BASE_DIR=$(cd `dirname $0` && pwd)
+cd $BASE_DIR
+
 images=`cat imagelist.txt`
 online_registry="demoregistry.dataman-inc.com"
 offline_registry="offlineregistry.dataman-inc.com:5000"
+
+mkdir -p ../offline-registry_data
+mkdir -p ../offline-images
 
 load_offlineregistry(){
 	docker pull $online_registry/$img &>/dev/null && echo "pull $img successful." && \
@@ -13,9 +19,6 @@ load_offlineregistry(){
 	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || echo "load $img  error !!!"
 }
 
-export_registryimages(){
-
-}
 
 for img in $images
 do
@@ -23,3 +26,9 @@ do
 done
 wait
 
+
+save_registry_image(){
+	ls ../offline-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz && echo "save registry images to successful."
+}
+
+save_registry_image
