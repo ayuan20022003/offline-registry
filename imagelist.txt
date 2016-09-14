@@ -12,8 +12,8 @@ library/centos7-docker-elasticsearch:v1.4.5.2016083003
 library/centos7-docker-logstash:v1.5.4.2016083007
 library/centos7-docker-kibana:v4.1.3.2016083102
 library/blackicebird-2048:latest
-library/haproxy:1.5.18-alpine
 library/centos7-docker-registry:v2.5.0.2016090301
 library/centos7-docker-harbor:v0.3.5.2016090300
 library/centos7-docker-harborjobservice:v0.3.5.2016090300
 library/centos7-nginx-1.10.1:latest
+library/alpine3.4-haproxy-sry3:v1.5.18.2016091402
