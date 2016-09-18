@@ -18,3 +18,5 @@ library/centos7-docker-harborjobservice:v0.3.5.2016090300
 library/centos7-nginx-1.10.1:latest
 library/alpine3.4-haproxy-sry3:v1.5.18.2016091402
 shurenyun/centos7-keepalived-1.2.13-check:20160914171756
+library/centos7-docker-prometheus:v1.1.2.2016091302
+library/centos7-docker-grafana:v3.1.1.2016091401
