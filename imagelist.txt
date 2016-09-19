@@ -1,10 +1,10 @@
 library/centos7-mesos-0.28.2-master
 library/centos7-mesos-0.28.2-slave
 library/centos7-mesos-0.28.2-marathon-1.1.1
-library/centos7-zookeeper-3.4.6:20160712192532
+library/centos7-zookeeper-3.4.6:20160918203431
 library/centos7-docker-consul-master:v0.6.4.201609010
 library/centos7-docker-consul-slave:v0.6.4.2016090701
-library/centos7-docker-fabio:v1.2.1.2016090702
+library/centos7-docker-fabio:v1.3.2.2016091901
 shurenyun/centos7-borgsphere:v1.0.1ff045
 library/rolex:v1.0.4
 library/centos7-docker-mysql:v5.6.26.2016090604
