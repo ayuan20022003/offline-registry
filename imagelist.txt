@@ -5,7 +5,7 @@ library/centos7-zookeeper-3.4.6:20160918203431
 library/centos7-docker-consul-master:v0.6.4.201609010
 library/centos7-docker-consul-slave:v0.6.4.2016090701
 library/centos7-docker-fabio:v1.3.2.2016091901
-shurenyun/centos7-borgsphere:v1.0.1ff045
+shurenyun/centos7-borgsphere:v1.0.f9d7b0
 library/rolex:v1.0.4
 library/centos7-docker-mysql:v5.6.26.2016090604
 library/centos7-docker-elasticsearch:v1.4.5.2016083003
