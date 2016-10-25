@@ -21,4 +21,3 @@ library/centos7-docker-grafana:v3.1.1.2016091401
 library/centos7-docker-cadvisor:v0.23.8.2016091302
 library/alpine3.4-base:latest
 library/dmprint:0.2
-library/dataman-mesos-slave-rm
