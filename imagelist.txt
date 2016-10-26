@@ -22,3 +22,4 @@ library/centos7-docker-alertmanager:v0.4.2.2016102502
 library/alpine3.4-base:latest
 library/dmprint:0.2
 library/blackicebird-2048:latest
+library/ubuntu-stress
