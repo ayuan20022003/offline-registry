@@ -17,7 +17,7 @@ mkdir -p ../offline-images
 load_offlineregistry(){
 	docker pull $online_registry/$img &>/dev/null && echo "pull $img successful." && \
 	docker tag $online_registry/$img $offline_registry/$img && \
-	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || echo "load $img  error !!!"
+	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "load $img  error !!!" && exit 1)
 }
 
 
