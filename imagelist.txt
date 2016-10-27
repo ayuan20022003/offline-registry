@@ -4,7 +4,7 @@ library/centos7-mesos-1.0.1-marathon-1.1.1
 library/centos7-zookeeper-3.4.6:20160918203431
 library/centos7-docker-consul:v0.7.0.2016092302
 library/centos7-docker-mysql:v5.6.26.2016090604
-shurenyun/centos7-borgsphere:v1.0.75ecdc
+shurenyun/centos7-borgsphere:v0.3.2-90-g9136d0c
 library/rolex:v1.0.4
 library/centos7-docker-elasticsearch:v1.4.5.2016102304
 library/centos7-docker-logstash:v1.5.4.2016083007
