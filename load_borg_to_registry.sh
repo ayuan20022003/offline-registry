@@ -19,4 +19,4 @@ BASE_DIR=$(cd `dirname $0` && pwd)
 
 load_offlineregistry
 
-sed -i "s/centos7-borgsphere:.*/centos7-${img}/g"  /data/offlinesry/ansible/roles/copy-run-script/templates/run_3.0.sh.j2
+sed -i "s/centos7-borgsphere:.*/centos7-${img}\"/g"  /data/offlinesry/ansible/roles/copy-run-script/templates/run_3.0.sh.j2
