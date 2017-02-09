@@ -5,7 +5,7 @@ services:
       network_mode: host
       restart: always
       volumes:
-        - /data/offlinesry/offline-registry_data:/var/lib/registry
+        - /data/offline-registry_data:/var/lib/registry
         - ./config/registry/:/etc/registry/
       environment:
         - GODEBUG=netdns=cgo
