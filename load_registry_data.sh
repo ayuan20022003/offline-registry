@@ -7,7 +7,7 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
-images=`cat ../offlinesry/imagelist.txt`
+images=`./print_json_value.py`
 online_registry="demoregistry.dataman-inc.com"
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
