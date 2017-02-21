@@ -11,7 +11,7 @@ registry_image_name=`awk '/centos7-docker-registry/{print $2}' docker-compose.ym
 if [ -f $CONFIG_DIR/config.yml ];then
 	rm -rf $CONFIG_DIR/config.yml
 fi
-cp $CONFIG_DIR/config.yml.teml $CONFIG_DIR/config.yml && \
+cp $CONFIG_DIR/config.yml.templ $CONFIG_DIR/config.yml && \
 sed -i 's/--registry_ip--/'$LOCAL_IP'/g' $CONFIG_DIR/config.yml && \
 docker images|grep $registry_image_name || docker load -i ../offline-images/registry.tar.gz && \
 docker-compose -p offline up -d
