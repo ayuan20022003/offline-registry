@@ -2,7 +2,7 @@
 import json
 
 
-filepath="/data/offlinesry/imagelist.txt"
+filepath="../offlinesry/imagelist.txt"
 
 list = {}
 with open(filepath) as f: 
