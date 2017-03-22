@@ -16,28 +16,36 @@ mkdir -p ../offline-images
 num=0
 
 load_offlineregistry(){
-	echo "##### load_offlineregistry start #####"
-	docker pull $offline_registry/$img &>/dev/null || \
-	docker pull $online_registry/$img &>/dev/null && \
-	docker tag $online_registry/$img $offline_registry/$img && \
-	docker push $offline_registry/$img &>/dev/null || (echo "load $img  error !!!" && num=1 && exit 1)
-	echo "##### load_offlineregistry end #####"
+	docker pull $offline_registry/$img &>/dev/null
+	if [ "$?" -eq 1 ];then
+		docker pull $online_registry/$img &>/dev/null
+		if [ "$?" -eq 1 ];then
+			echo "pull $online_registry/$img fail" && exit 1
+		fi
+
+		docker tag $online_registry/$img $offline_registry/$img
+		if [ "$?" -eq 1 ];then
+			echo "tag $online_registry/$img fail" && exit 1
+		fi
+
+		docker push $offline_registry/$img &>/dev/null
+		if [ "$?" -eq 1 ];then
+			echo "push $online_registry/$img fail" && exit 1
+		fi
+	fi
 }
-
-
-for img in $images
-do
-	load_offlineregistry
-done
-#wait
-
 
 save_registry_image(){
-	ls ../offline-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz && echo "save registry images to successful."
+	ls ../offline-images/registry.tar.gz ||	docker save $online_registry/library/centos7-docker-registry:v2.5.0.2016090301|gzip > ../offline-images/registry.tar.gz || echo "save registry images to fail." && exit 1
 }
 
-save_registry_image
-
-if [ $num -eq 0 ];then
-	echo "load all images done."
-fi
+main(){
+	echo "##### load_offlineregistry start #####"
+	save_registry_image
+	for img in $images
+	do
+		load_offlineregistry
+	done
+	echo "##### load_offlineregistry end #####"
+}
+main
