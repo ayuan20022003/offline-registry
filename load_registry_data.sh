@@ -17,19 +17,19 @@ num=0
 
 load_offlineregistry(){
 	docker pull $offline_registry/$img &>/dev/null
-	if [ "$?" -eq 1 ];then
+	if [ $? -eq 1 ];then
 		docker pull $online_registry/$img &>/dev/null
-		if [ "$?" -eq 1 ];then
+		if [ $? -eq 1 ];then
 			echo "pull $online_registry/$img fail" && exit 1
 		fi
 
 		docker tag $online_registry/$img $offline_registry/$img
-		if [ "$?" -eq 1 ];then
+		if [ $? -eq 1 ];then
 			echo "tag $online_registry/$img fail" && exit 1
 		fi
 
 		docker push $offline_registry/$img &>/dev/null
-		if [ "$?" -eq 1 ];then
+		if [ $? -eq 1 ];then
 			echo "push $online_registry/$img fail" && exit 1
 		fi
 	fi
