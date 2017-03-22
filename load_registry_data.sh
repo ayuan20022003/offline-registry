@@ -14,18 +14,22 @@ offline_registry="offlineregistry.dataman-inc.com:5000"
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
 num=0
+
 load_offlineregistry(){
-	docker pull $online_registry/$img &>/dev/null && echo "pull $img successful." && \
+	echo "##### load_offlineregistry start #####"
+	docker pull $offline_registry/$img &>/dev/null || \
+	docker pull $online_registry/$img &>/dev/null && \
 	docker tag $online_registry/$img $offline_registry/$img && \
-	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "load $img  error !!!" && num=1 && exit 1)
+	docker push $offline_registry/$img &>/dev/null || (echo "load $img  error !!!" && num=1 && exit 1)
+	echo "##### load_offlineregistry end #####"
 }
 
 
 for img in $images
 do
-	load_offlineregistry &
+	load_offlineregistry
 done
-wait
+#wait
 
 
 save_registry_image(){
