@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 # 功能: 从线上pull镜像导入线下安装registry
 # Author: jyliu
 
