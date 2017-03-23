@@ -1,6 +1,7 @@
 #!/bin/bash
 # 功能: 从线上pull镜像导入线下安装registry
 # Author: jyliu
+set -e
 
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
@@ -11,23 +12,22 @@ offline_registry="offlineregistry.dataman-inc.com:5000"
 
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
-num=0
 
 load_offlineregistry(){
-	docker pull $offline_registry/$img &>/dev/null
-	if [ $? -eq 1 ];then
-		docker pull $online_registry/$img &>/dev/null
-		if [ $? -eq 1 ];then
+	docker pull $offline_registry/$img &>/dev/null || go="ok"
+	if [ x"$go" == x"ok" ];then
+		docker pull $online_registry/$img &>/dev/null || go="fail"
+		if [ x"$go" == x"fail" ];then
 			echo "pull $online_registry/$img fail" && exit 1
 		fi
 
 		docker tag $online_registry/$img $offline_registry/$img
-		if [ $? -eq 1 ];then
+		if [ x"$go" == x"fail" ];then
 			echo "tag $online_registry/$img fail" && exit 1
 		fi
 
 		docker push $offline_registry/$img &>/dev/null
-		if [ $? -eq 1 ];then
+		if [ x"$go" == x"fail" ];then
 			echo "push $online_registry/$img fail" && exit 1
 		fi
 	fi
