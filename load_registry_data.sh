@@ -14,7 +14,7 @@ mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
 
 load_offlineregistry(){
-	docker pull $offline_registry/$img &>/dev/null || go="ok"
+	docker pull $offline_registry/$img &>/dev/null && echo "this $offline_registry/$img is ok" || go="ok"
 	if [ x"$go" == x"ok" ];then
 		docker pull $online_registry/$img &>/dev/null || go="fail"
 		if [ x"$go" == x"fail" ];then
