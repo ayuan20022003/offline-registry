@@ -1,7 +1,7 @@
 #!/bin/bash
 # 功能: 从线上pull镜像导入线下安装registry
 # Author: jyliu
-set -e
+set -ex
 
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
