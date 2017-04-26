@@ -6,7 +6,10 @@ set -ex
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
-images=`./print_json_value.py`
+images=$1
+if [ -z "$images" ];then
+	images=`./print_json_value.py`
+fi
 online_registry="demoregistry.dataman-inc.com"
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
