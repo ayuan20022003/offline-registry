@@ -1,7 +1,7 @@
 #!/bin/bash
 # 功能: 从线上pull镜像导入线下安装registry
 # Author: jyliu
-set -ex
+set -e
 
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
@@ -15,6 +15,13 @@ offline_registry="offlineregistry.dataman-inc.com:5000"
 
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
+
+registry_check(){
+        REGISTRY_HEALTH=$(docker ps | grep offline_registry | wc -l)
+        if [ "$REGISTRY_HEALTH" -eq 0 ];then
+                echo " offline_registry is down,is scrpit is not working" && exit 1
+        fi
+}
 
 load_offlineregistry(){
 	docker pull $offline_registry/$img &>/dev/null && echo "this $offline_registry/$img is ok" || go="ok"
@@ -41,6 +48,7 @@ save_registry_image(){
 }
 
 main(){
+	registry_check
 	echo "##### load_offlineregistry start #####"
 	save_registry_image
 	for img in $images
@@ -49,4 +57,5 @@ main(){
 	done
 	echo "##### load_offlineregistry end #####"
 }
+
 main
