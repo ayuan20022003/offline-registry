@@ -14,4 +14,6 @@ fi
 cp $CONFIG_DIR/config.yml.templ $CONFIG_DIR/config.yml && \
 sed -i 's/--registry_ip--/'$LOCAL_IP'/g' $CONFIG_DIR/config.yml && \
 docker images|grep $registry_image_name || docker load -i ../offline-images/registry.tar.gz && \
+
+export COMPOSE_HTTP_TIMEOUT=300
 docker-compose -p offline up -d
