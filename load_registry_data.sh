@@ -10,7 +10,7 @@ images=$1
 if [ -z "$images" ];then
 	images=`./print_json_value.py`
 fi
-online_registry="demoregistry.dataman-inc.com"
+online_registry="registry.docker-cn.com"
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
 mkdir -p ../offline-registry_data

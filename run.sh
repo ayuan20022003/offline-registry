@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
-. ../offlinesry/config.cfg
+if [  -f "../offlinesry/config.cfg" ];then
+	. ../offlinesry/config.cfg
+else
+	. ./config.cfg
+fi
 if [ x"$LOCAL_IP" == x ];then
 	exit 1
 fi

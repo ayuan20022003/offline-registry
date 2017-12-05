@@ -4,6 +4,7 @@ services:
       image: demoregistry.dataman-inc.com/library/centos7-docker-registry:v2.5.0.2016090301
       network_mode: host
       restart: always
+      privileged: true
       logging:
         driver: journald
       volumes:
