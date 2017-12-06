@@ -6,6 +6,12 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
+if [  -f "../offlinesry/config.cfg" ];then
+        . ../offlinesry/config.cfg
+else
+        . ./config.cfg
+fi
+
 images=$1
 if [ -z "$images" ];then
 	images=`./print_json_value.py`

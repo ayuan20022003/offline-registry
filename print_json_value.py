@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import json
+import os
 
-
-filepath="../offlinesry/imagelist.txt"
+filepath=os.getenv('IMAGELIST_DIR', "../offlinesry/imagelist.txt")
 
 list = {}
 with open(filepath) as f: 
