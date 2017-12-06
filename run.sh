@@ -2,6 +2,8 @@
 set -e
 if [  -f "../offlinesry/config.cfg" ];then
 	. ../offlinesry/config.cfg
+elif [ -f "../config.cfg" ];then
+        . ../config.cfg
 else
 	. ./config.cfg
 fi
