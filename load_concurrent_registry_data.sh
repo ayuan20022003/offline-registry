@@ -24,6 +24,10 @@ if [ -z "$IMAGELIST_FILE_PATH" ] || [ -z "$online_registry" ];then
 	echo "Usage: $0 <IMAGELIST_FILE> <online_registry_domain> [single_image]"
 	exit 1
 fi
+
+if [ "$online_registry" == "docker.io" ];then
+	online_registry="registry.docker-cn.com"
+fi
 	
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
