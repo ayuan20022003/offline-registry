@@ -2,7 +2,7 @@
 import json
 import os
 
-filepath=os.getenv('IMAGELIST_DIR', "../offlinesry/imagelist.txt")
+filepath=os.getenv('IMAGELIST_FILE_PATH', "../offlinesry/imagelist.txt")
 
 list = {}
 with open(filepath) as f: 

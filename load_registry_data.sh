@@ -14,11 +14,21 @@ else
         . ./config.cfg
 fi
 
-images=$1
+
+export IMAGELIST_FILE_PATH=$1
+online_registry=$2
+
+
+if [ -z "$IMAGELIST_FILE_PATH" ] || [ -z "$online_registry" ];then
+        echo "Usage: $0 <IMAGELIST_FILE> <online_registry_domain>  [single_image]"
+        exit 1
+fi
+
+images=$3
 if [ -z "$images" ];then
 	images=`./print_json_value.py`
 fi
-online_registry="registry.docker-cn.com"
+
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
 mkdir -p ../offline-registry_data

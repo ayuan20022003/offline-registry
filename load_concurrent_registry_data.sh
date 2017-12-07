@@ -16,9 +16,21 @@ else
 	. ./config.cfg
 fi
 
-images=`./print_json_value.py`
-online_registry="registry.docker-cn.com"
+export IMAGELIST_FILE_PATH=$1
+online_registry=$2
+
+
+if [ -z "$IMAGELIST_FILE_PATH" ] || [ -z "$online_registry" ];then
+	echo "Usage: $0 <IMAGELIST_FILE> <online_registry_domain> [single_image]"
+	exit 1
+fi
+	
 offline_registry="offlineregistry.dataman-inc.com:5000"
+
+images=$3
+if [ -z "$images" ];then
+        images=`./print_json_value.py`
+fi
 
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
@@ -26,7 +38,7 @@ num=0
 load_offlineregistry(){
 	docker pull $online_registry/$img &>/dev/null && echo "pull $img successful." && \
 	docker tag $online_registry/$img $offline_registry/$img && \
-	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "load $img  error !!!" && num=1 && exit 1)
+	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "pull or load $img  error !!!" && num=1 && exit 1)
 }
 
 
