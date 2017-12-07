@@ -6,5 +6,3 @@ cd $BASE_DIR
 ./stop.sh
 rm -rf ../offline-registry_data
 ./run.sh
-sleep 5
-./load_registry_data.sh
