@@ -39,12 +39,14 @@ fi
 mkdir -p ../offline-registry_data
 mkdir -p ../offline-images
 
-rm -f /tmp/loadimageerr.log
-rm -f /tmp/loadimagestatus.log
+errlog_path=/tmp/${online_registry}.err.log
+statuslog_path=/tmp/${online_registry}.status.log
+rm -f ${errlog_path}
+rm -f ${statuslog_path}
 load_offlineregistry(){
 	docker pull $online_registry/$img &>/dev/null && echo "pull $img successful." && \
 	docker tag $online_registry/$img $offline_registry/$img && \
-	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "pull or load $img  error !!!" >> /tmp/loadimageerr.log && echo 1 > /tmp/loadimagestatus.log)
+	docker push $offline_registry/$img &>/dev/null && echo "load $img successful." || (echo "pull or load $img  error !!!" >> ${errlog_path} && echo 1 > ${statuslog_path})
 }
 
 
@@ -61,8 +63,8 @@ save_registry_image(){
 
 save_registry_image
 
-if [ -f "/tmp/loadimagestatus.log" ];then
-	num=`cat /tmp/loadimagestatus.log`
+if [ -f "$statuslog_path" ];then
+	num=`cat $statuslog_path`
 else
 	num=0
 fi
@@ -70,5 +72,5 @@ fi
 if [ "$num" -eq 0 ];then
 	echo "load all images done."
 else
-	cat /tmp/loadimageerr.log	
+	cat $errlog_path	
 fi
