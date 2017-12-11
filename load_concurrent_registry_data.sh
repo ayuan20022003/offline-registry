@@ -70,7 +70,7 @@ else
 fi
 
 if [ "$num" -eq 0 ];then
-	echo "load all images done."
+	echo "load $IMAGELIST_FILE_PATH all images done."
 else
 	cat $errlog_path	
 fi
