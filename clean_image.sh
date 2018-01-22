@@ -3,6 +3,7 @@ set -e
 BASE_DIR=$(cd `dirname $0` && pwd)
 cd $BASE_DIR
 
-./stop.sh
+systemctl stop offline-registry
 rm -rf ../offline-registry_data
-./run.sh
+mkdir -p ../offline-registry_data
+systemctl start offline-registry
