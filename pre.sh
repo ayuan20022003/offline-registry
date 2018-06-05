@@ -9,11 +9,12 @@ elif [ -f "../offline-dmos/config.cfg" ]; then
 	. ../offline-dmos/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
-else
+elif [ -f "./config.cfg" ]
 	. ./config.cfg
 fi
 if [ x"$LOCAL_IP" == x ];then
-	exit 1
+	echo "LOCAL_IP is empty, set 127.0.0.1"
+	LOCAL_IP=127.0.0.1
 fi
 registry_image_name=demoregistry.dataman-inc.com/library/centos7-docker-registry:v2.5.0.2016090301
 if [ -f $CONFIG_DIR/config.yml ];then
