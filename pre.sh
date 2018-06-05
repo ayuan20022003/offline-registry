@@ -9,7 +9,7 @@ elif [ -f "../offline-dmos/config.cfg" ]; then
 	. ../offline-dmos/config.cfg
 elif [ -f "../config.cfg" ];then
         . ../config.cfg
-elif [ -f "./config.cfg" ]
+elif [ -f "./config.cfg" ];then
 	. ./config.cfg
 fi
 if [ x"$LOCAL_IP" == x ];then
