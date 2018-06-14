@@ -27,9 +27,9 @@ if [ -z "$IMAGELIST_FILE_PATH" ] || [ -z "$online_registry" ];then
 	exit 1
 fi
 
-if [ "$online_registry" == "docker.io" ];then
-	online_registry="registry.docker-cn.com"
-fi
+#if [ "$online_registry" == "docker.io" ];then
+#	online_registry="registry.docker-cn.com"
+#fi
 	
 offline_registry="offlineregistry.dataman-inc.com:5000"
 
