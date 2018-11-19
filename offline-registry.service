@@ -1,22 +1,12 @@
 [Unit]
 Description=Offline Registry Service
 After=docker.service
-Requires=docker.service
 
 [Service]
-TimeoutStartSec=0
 Restart=always
-ExecStartPre=-/usr/bin/docker stop offline-registry
-ExecStartPre=-/usr/bin/docker rm offline-registry
 ExecStartPre=/data/offline-openshift-origin/offline-registry/pre.sh
-ExecStart=/usr/bin/docker run --name offline-registry \
-			--privileged  --rm \
-			--log-driver journald \
-			--net host \
-			-v /data/offline-openshift-origin/offline-registry_data:/var/lib/registry \
-			-v /data/offline-openshift-origin/offline-registry/config/registry:/etc/registry \
-			-e GODEBUG=netdns=cgo \
-			demoregistry.dataman-inc.com/library/centos7-docker-registry:v2.5.0.2016090301 serve /etc/registry/config.yml
+ExecStart=/usr/bin/docker start -a offline-registry
+ExecStop=/usr/bin/docker stop -t 2 offline-registry
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=local.target

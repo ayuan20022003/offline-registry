@@ -25,3 +25,14 @@ sed -i 's/--registry_ip--/'$LOCAL_IP'/g' $CONFIG_DIR/config.yml && \
 docker images|grep $registry_image_name || docker load -i ../offline-images/registry.tar.gz 
 
 mkdir -p ../offline-registry_data
+
+docker stop offline-registry || echo
+docker rm offline-registry || echo
+docker run -d --name offline-registry \
+                        --privileged --restart=always \
+                        --log-driver journald \
+                        --net host \
+                        -v /data/offline-openshift-origin/offline-registry_data:/var/lib/registry \
+                        -v /data/offline-openshift-origin/offline-registry/config/registry:/etc/registry \
+                        -e GODEBUG=netdns=cgo \
+                        demoregistry.dataman-inc.com/library/centos7-docker-registry:v2.5.0.2016090301 serve /etc/registry/config.yml
